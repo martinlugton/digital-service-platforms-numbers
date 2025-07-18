@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>GOV.UK Platform Metrics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">GOV.UK Platform Metrics</h1>
+        <div id="data" class="mt-4"></div>
+    </div>
+    <script>
+        fetch('/data')
+            .then(response => response.json())
+            .then(data => {
+                const dataDiv = document.getElementById('data');
+                let html = '';
+
+                // GOV.UK Pay
+                html += '<h2>GOV.UK Pay</h2>';
+                html += '<ul>';
+                html += `<li>Live services: ${data.govuk_pay.live_services}</li>`;
+                html += `<li>Transactions processed: ${data.govuk_pay.transactions_processed}</li>`;
+                html += `<li>Total amount processed: ${data.govuk_pay.total_amount}</li>`;
+                html += `<li>Organisations: ${data.govuk_pay.organisations}</li>`;
+                html += '</ul>';
+
+                // GOV.UK Notify
+                html += '<h2>GOV.UK Notify</h2>';
+                html += '<ul>';
+                html += `<li>Messages sent since May 2016: ${data.govuk_notify.messages_sent}</li>`;
+                html += `<li>Services: ${data.govuk_notify.services}</li>`;
+                html += `<li>Organisations: ${data.govuk_notify.organisations}</li>`;
+                html += '</ul>';
+
+                // GOV.UK Forms
+                html += '<h2>GOV.UK Forms</h2>';
+                html += '<ul>';
+                html += `<li>Published forms: ${data.govuk_forms.published_forms}</li>`;
+                html += `<li>Form submissions: ${data.govuk_forms.form_submissions}</li>`;
+                html += '</ul>';
+
+                dataDiv.innerHTML = html;
+            });
+    </script>
+</body>
+</html>

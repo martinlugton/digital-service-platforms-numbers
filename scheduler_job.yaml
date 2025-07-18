@@ -1,0 +1,7 @@
+name: projects/dsp-numbers/locations/us-central1/jobs/scrape-data-daily-trigger
+description: Triggers the scrape-data Cloud Function daily at 3 AM
+schedule: 0 3 * * *
+timeZone: America/New_York
+pubsubTarget:
+  topicName: projects/dsp-numbers/topics/scrape-data-topic
+  data: ""
